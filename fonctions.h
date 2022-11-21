@@ -8,8 +8,10 @@ typedef struct linked_list{
 
 } linked_list;
 
+linked_list* new_element(int data);
 void push( linked_list *head, int data);
 void pop(linked_list*head, int data);
+int length(linked_list*head);
 
 
 

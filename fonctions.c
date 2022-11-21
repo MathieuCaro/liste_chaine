@@ -7,6 +7,10 @@
 
 linked_list* new_element(int data){
     linked_list* element =(linked_list*)malloc((sizeof(linked_list)));
+    if(element==NULL){
+        printf("Probleme d'allocation");
+        exit(1);
+    }
     element->next=NULL;
     element->previous=NULL;
     element->data=data;
@@ -16,7 +20,7 @@ linked_list* new_element(int data){
 //push : add an element at the end of the list
 void push( linked_list *head, int data){
     linked_list *new_one= head;
-    while(new_one->next=NULL){
+    while(new_one->next!=NULL){
         new_one=new_one->next;
     }
 
@@ -33,4 +37,15 @@ void pop(linked_list*head, int data){
     }
     last_one->previous->next=NULL;
     free(last_one);
+}
+
+//length : return the length of the linked list
+int length(linked_list*head){
+    int compteur=1;
+    linked_list *last_one=head;
+    while(last_one->next!=NULL){
+        compteur+=1;
+        last_one=last_one->next;
+    }
+    return compteur;
 }
