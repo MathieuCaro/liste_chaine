@@ -29,8 +29,8 @@ void push( linked_list *head, int data){
 void pop(linked_list*head, int data){
     linked_list *last_one=head;
     while(last_one->next!=NULL){
-        last_one=last_one->previous;
-        last_one->next=NULL;
-        free(last_one->next);
+        last_one=last_one->next;     
     }
+    last_one->previous->next=NULL;
+    free(last_one);
 }
