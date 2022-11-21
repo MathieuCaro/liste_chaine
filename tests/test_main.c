@@ -36,7 +36,7 @@ void test_pop(void){
     push(test_pop, 12);
     push(test_pop, 25);
     push(test_pop, 9);
-    CU_ASSERT(length(test_pop)==2);
+    CU_ASSERT(length(test_pop)==4);
 }
 
 
@@ -62,7 +62,8 @@ int main()
     /* add the tests to the suite */
     if (
         NULL == CU_add_test(pSuite, "test initialisation", test_init)||
-        NULL == CU_add_test(pSuite, "test de la fonction push", test_push)
+        NULL == CU_add_test(pSuite, "test de la fonction push", test_push)||
+        NULL == CU_add_test(pSuite, "test de la fonction pop", test_pop)
         )
     {
         CU_cleanup_registry();

@@ -8,7 +8,7 @@
 linked_list* new_element(int data){
     linked_list* element =(linked_list*)malloc((sizeof(linked_list)));
     if(element==NULL){
-        printf("Probleme d'allocation");
+        printf("Probleme d'allocation memoire");
         exit(1);
     }
     element->next=NULL;
