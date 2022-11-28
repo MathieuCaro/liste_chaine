@@ -129,5 +129,3 @@ int length(linked_list *head)
     return compteur;
 }
 
-
-//verifier la présence du pointeur puis mettre à nul

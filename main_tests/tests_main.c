@@ -27,90 +27,101 @@ void test_init(void)
 void test_push(void)
 {
     linked_list *test_push = new_element(5);
+    int liste_value[]={5,12,25,60};
+    linked_list *pt=test_push;
     CU_ASSERT(length(test_push) == 1);
     push(test_push, 12);
-    CU_ASSERT(test_push->next->data == 12);
     CU_ASSERT(length(test_push) == 2);
-    CU_ASSERT(test_push->next->previous->data == 5);
     push(test_push, 25);
     CU_ASSERT(length(test_push) == 3);
-    CU_ASSERT(test_push->next->next->data == 25);
-    CU_ASSERT(test_push->next->next->previous->data == 12);
-    CU_ASSERT(test_push->next->next->previous->previous->data == 5);
+    push(test_push, 12);
+    for(int i=0;i<3;i++){
+        CU_ASSERT(pt->data==liste_value[i]);
+        pt=pt->next;
+    }
     list_free(test_push);
-    //faire un pointeur pour vérifier les différents elementts de la liste
 }
 
 void test_pop(void)
 {
     linked_list *test_pop = new_element(5);
-    push(test_pop, 12);
-    push(test_pop, 25);
-    push(test_pop, 9);
-    push(test_pop, 45);
-    push(test_pop, 4);
+    int liste_value[]={12,25,9,45,4};
+    for(int i=0;i<5;i++){
+        push(test_pop, liste_value[i]);
+    }
     CU_ASSERT(length(test_pop) == 6);
-    CU_ASSERT(test_pop->next->data == 12);
-    CU_ASSERT(test_pop->next->next->data == 25);
-    CU_ASSERT(test_pop->next->next->next->data == 9);
-    CU_ASSERT(test_pop->next->next->next->next->data == 45);
+    linked_list *pt=test_pop;
+    CU_ASSERT(pt->data==5);
+    for(int i=0;i<5;i++){
+        pt = pt->next;
+        CU_ASSERT(pt->data==liste_value[i]);
+    }
     pop(test_pop);
     CU_ASSERT(length(test_pop) == 5);
-    CU_ASSERT(test_pop->next->next->next->next->next == NULL);
+    pt = pt->previous;
+    CU_ASSERT(pt->data==45);
     pop(test_pop);
     CU_ASSERT(length(test_pop) == 4);
-    CU_ASSERT(test_pop->next->next->next->next == NULL);
+    pt = pt->previous;
+    CU_ASSERT(pt->data==9);
     list_free(test_pop);
 }
 
 void test_add_index(void)
 {
     linked_list *test_add_index = new_element(10);
-    push(test_add_index, 20);
-    push(test_add_index, 30);
-    push(test_add_index, 40);
-    push(test_add_index, 50);
-    push(test_add_index, 60);
-    push(test_add_index, 70);
+    linked_list *pt=test_add_index;
+    int list_value[]={20,40,50,60,70};
+    int new_list_value[]={20,30,40,50,60,70};
+    for(int i=0;i<5;i++){
+        push(test_add_index, list_value[i]);
+    }
+    CU_ASSERT(length(test_add_index) == 6);
+    add_index(test_add_index, 30, 3);
     CU_ASSERT(length(test_add_index) == 7);
-    // display_list(test_add_index);
-    add_index(test_add_index, 30, 2);
-    // display_list(test_add_index);
-    CU_ASSERT(test_add_index->next->next->next->data == 30);
+    pt=pt->next;
+    for(int i=0;i<5;i++){
+        CU_ASSERT(pt->data==new_list_value[i]);
+        pt=pt->next;
+    }
     list_free(test_add_index);
 }
 
 void test_add_before(void)
 {
     linked_list *test_add_before = new_element(10);
-    push(test_add_before, 20);
-    push(test_add_before, 30);
-    push(test_add_before, 40);
-    push(test_add_before, 50);
-    push(test_add_before, 60);
-    push(test_add_before, 70);
-    // display_list(test_add_before);
+    linked_list *pt=test_add_before;
+    int liste_value[]={20,30,40,50,60,70};
+    int new_list_value[]={20,30,40,45,50,60,70};
+    for(int i=0;i<6;i++){
+        push(test_add_before, liste_value[i]);
+    }
     CU_ASSERT(length(test_add_before) == 7);
     add_before(test_add_before, 45, 50);
-    // display_list(test_add_before);
-    CU_ASSERT(test_add_before->next->next->next->next->data == 45);
+    CU_ASSERT(length(test_add_before) == 8);
+    for(int i=0;i<7;i++){
+        pt=pt->next;
+        CU_ASSERT(pt->data==new_list_value[i]);
+    };
     list_free(test_add_before);
 }
 
 void test_add_after(void)
 {
     linked_list *test_add_after = new_element(10);
-    push(test_add_after, 20);
-    push(test_add_after, 30);
-    push(test_add_after, 40);
-    push(test_add_after, 50);
-    push(test_add_after, 60);
-    push(test_add_after, 70);
-    display_list(test_add_after);
+    linked_list *pt=test_add_after;
+    int list_value[]={20,30,40,50,60,70};
+    int new_list_value[]={20,30,40,45,50,60,70};
+    for(int i=0;i<6;i++){
+        push(test_add_after, list_value[i]);
+    }
     CU_ASSERT(length(test_add_after) == 7);
-    add_after(test_add_after, 45, 50);
-    display_list(test_add_after);
-    CU_ASSERT(test_add_after->next->next->next->next->next->data == 45);
+    add_after(test_add_after, 45, 40);
+    CU_ASSERT(length(test_add_after) == 8);
+    for(int i=0;i<7;i++){
+        pt=pt->next;
+        CU_ASSERT(pt->data==new_list_value[i]);
+    };
     list_free(test_add_after);
 }
 
