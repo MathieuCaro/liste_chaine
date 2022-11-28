@@ -10,6 +10,7 @@ typedef struct linked_list
 } linked_list;
 
 linked_list *new_element(int data);
+
 void push(linked_list *head, int data);
 void pop(linked_list *head);
 int length(linked_list *head);
@@ -17,5 +18,7 @@ void add_index(linked_list *head, int data, int index);
 void display_list(linked_list *head);
 void add_before(linked_list *head, int data, int value);
 void add_after(linked_list *head, int data, int value);
+void list_free(linked_list *l);
+
 
 #endif

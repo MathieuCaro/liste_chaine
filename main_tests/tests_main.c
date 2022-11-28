@@ -18,7 +18,11 @@ void test_init(void)
     CU_ASSERT(test_init->previous == NULL);
     CU_ASSERT(test_init->data == 5);
     CU_ASSERT(length(test_init) == 1);
+    list_free(test_init);
+    
 }
+
+
 
 void test_push(void)
 {
@@ -33,6 +37,7 @@ void test_push(void)
     CU_ASSERT(test_push->next->next->data == 25);
     CU_ASSERT(test_push->next->next->previous->data == 12);
     CU_ASSERT(test_push->next->next->previous->previous->data == 5);
+    list_free(test_push);
     //faire un pointeur pour vérifier les différents elementts de la liste
 }
 
@@ -55,6 +60,7 @@ void test_pop(void)
     pop(test_pop);
     CU_ASSERT(length(test_pop) == 4);
     CU_ASSERT(test_pop->next->next->next->next == NULL);
+    list_free(test_pop);
 }
 
 void test_add_index(void)
@@ -71,6 +77,7 @@ void test_add_index(void)
     add_index(test_add_index, 30, 2);
     // display_list(test_add_index);
     CU_ASSERT(test_add_index->next->next->next->data == 30);
+    list_free(test_add_index);
 }
 
 void test_add_before(void)
@@ -87,6 +94,7 @@ void test_add_before(void)
     add_before(test_add_before, 45, 50);
     // display_list(test_add_before);
     CU_ASSERT(test_add_before->next->next->next->next->data == 45);
+    list_free(test_add_before);
 }
 
 void test_add_after(void)
@@ -102,7 +110,8 @@ void test_add_after(void)
     CU_ASSERT(length(test_add_after) == 7);
     add_after(test_add_after, 45, 50);
     display_list(test_add_after);
-    CU_ASSERT(test_add_after->next->next->next->next->data == 45);
+    CU_ASSERT(test_add_after->next->next->next->next->next->data == 45);
+    list_free(test_add_after);
 }
 
 int init_suite(void) { return 0; }
