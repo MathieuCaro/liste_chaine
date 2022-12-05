@@ -62,19 +62,19 @@ void pop(linked_list *head)
 
 void add_index(linked_list *head, int data, int index)
 {
-    linked_list *added_after = head, *temp;
+    linked_list *added_index = head, *temp;
     int compteur = 0;
     while (compteur < index - 1)
     {
-        added_after = added_after->next;
+        added_index = added_index->next;
         compteur++;
     }
 
     temp = new_element(data);
-    temp->next = added_after;
-    temp->previous = added_after->previous;
-    added_after->previous->next = temp;
-    added_after->previous = temp;
+    temp->next = added_index;
+    temp->previous = added_index->previous;
+    added_index->previous->next = temp;
+    added_index->previous = temp;
 }
 
 void display_list(linked_list *head)
@@ -129,6 +129,10 @@ int length(linked_list *head)
         last_one = last_one->next;
     }
     return compteur;
+}
+
+void swap(linked_list *head)
+{
 }
 
 void revert(linked_list *head)

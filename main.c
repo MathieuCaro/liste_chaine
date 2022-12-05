@@ -9,9 +9,7 @@ int main()
 {
     linked_list *head = new_element(1);
     display_list(head);
-    push(head, 4);
-    push(head, 5);
-    push(head, 6);
+    add_index(head, 2, 0);
     display_list(head);
     revert(head);
     display_list(head);

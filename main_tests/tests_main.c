@@ -9,17 +9,6 @@
 #include "../fonctions.h"
 
 // fonction qui libère l'ensemble de la mémoire de la liste
-
-void test_init(void)
-{
-    linked_list *test_init = new_element(5);
-    CU_ASSERT(test_init->next == NULL);
-    CU_ASSERT(test_init->previous == NULL);
-    CU_ASSERT(test_init->data == 5);
-    CU_ASSERT(length(test_init) == 1);
-    list_free(test_init);
-}
-
 void test_length(void)
 {
     linked_list *test_length = new_element(5);
@@ -31,6 +20,16 @@ void test_length(void)
     CU_ASSERT(length(test_length) == 3);
     push(test_length, 12);
     list_free(test_length);
+}
+
+void test_init(void)
+{
+    linked_list *test_init = new_element(5);
+    CU_ASSERT(test_init->next == NULL);
+    CU_ASSERT(test_init->previous == NULL);
+    CU_ASSERT(test_init->data == 5);
+    CU_ASSERT(length(test_init) == 1);
+    list_free(test_init);
 }
 
 void test_push(void)
@@ -150,7 +149,7 @@ void test_revert(void)
     linked_list *test_revert = new_element(10);
     linked_list *pt = test_revert;
     int list_value[] = {20, 30, 40, 50, 60, 70};
-    // int new_list_value[] = {70, 60, 50, 40, 30, 20, 10};
+    int new_list_value[] = {70, 60, 50, 40, 30, 20, 10};
     for (int i = 0; i < 6; i++)
     {
         push(test_revert, list_value[i]);
@@ -163,12 +162,12 @@ void test_revert(void)
         CU_ASSERT(pt->data == list_value[i]);
     };
     revert(test_revert);
-    /*for (int i = 0; i < 7; i++)
+    for (int i = 6; i >= 0; i--)
     {
-        printf("%p\n", (void *)pt);
+
         CU_ASSERT(pt->data == new_list_value[i]);
-        pt = pt->next;
-    };*/
+        pt = pt->previous;
+    };
 
     list_free(test_revert);
 }
