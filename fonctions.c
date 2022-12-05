@@ -22,11 +22,11 @@ linked_list *new_element(int data)
 void list_free(linked_list *l)
 {
    linked_list *tmp;
-   linked_list *pelem = l;
-   while(pelem)
+   linked_list *first = l;
+   while(first)
    {
-     tmp = pelem;
-     pelem = pelem->next;
+     tmp = first;
+     first = first->next;
      free(tmp);
    }
    if(l!=NULL){
