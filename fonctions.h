@@ -19,6 +19,6 @@ void display_list(linked_list *head);
 void add_before(linked_list *head, int data, int value);
 void add_after(linked_list *head, int data, int value);
 void list_free(linked_list *l);
-
+void revert(linked_list *head);
 
 #endif

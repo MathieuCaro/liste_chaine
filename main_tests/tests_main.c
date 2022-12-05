@@ -20,6 +20,19 @@ void test_init(void)
     list_free(test_init);
 }
 
+void test_length(void)
+{
+    linked_list *test_length = new_element(5);
+    CU_ASSERT(length(test_length) == 1);
+    CU_ASSERT(length(test_length) == 1);
+    push(test_length, 12);
+    CU_ASSERT(length(test_length) == 2);
+    push(test_length, 25);
+    CU_ASSERT(length(test_length) == 3);
+    push(test_length, 12);
+    list_free(test_length);
+}
+
 void test_push(void)
 {
     linked_list *test_push = new_element(5);
@@ -132,6 +145,34 @@ void test_add_after(void)
     list_free(test_add_after);
 }
 
+void test_revert(void)
+{
+    linked_list *test_revert = new_element(10);
+    linked_list *pt = test_revert;
+    int list_value[] = {20, 30, 40, 50, 60, 70};
+    // int new_list_value[] = {70, 60, 50, 40, 30, 20, 10};
+    for (int i = 0; i < 6; i++)
+    {
+        push(test_revert, list_value[i]);
+    }
+    CU_ASSERT(length(test_revert) == 7);
+    CU_ASSERT(pt->data == 10);
+    for (int i = 0; i < 6; i++)
+    {
+        pt = pt->next;
+        CU_ASSERT(pt->data == list_value[i]);
+    };
+    revert(test_revert);
+    /*for (int i = 0; i < 7; i++)
+    {
+        printf("%p\n", (void *)pt);
+        CU_ASSERT(pt->data == new_list_value[i]);
+        pt = pt->next;
+    };*/
+
+    list_free(test_revert);
+}
+
 int init_suite(void) { return 0; }
 int clean_suite(void) { return 0; }
 
@@ -154,11 +195,13 @@ int main()
     /* add the tests to the suite */
     if (
         NULL == CU_add_test(pSuite, "test initialisation", test_init) ||
+        NULL == CU_add_test(pSuite, "test de longueur de la liste chainée", test_length) ||
         NULL == CU_add_test(pSuite, "test de la fonction push", test_push) ||
         NULL == CU_add_test(pSuite, "test de la fonction pop", test_pop) ||
         NULL == CU_add_test(pSuite, "test de la fonction add before", test_add_before) ||
         NULL == CU_add_test(pSuite, "test de la fonction add index", test_add_index) ||
-        NULL == CU_add_test(pSuite, "test de la fonction add after", test_add_after))
+        NULL == CU_add_test(pSuite, "test de la fonction add after", test_add_after) ||
+        NULL == CU_add_test(pSuite, "test de la fonction revert", test_revert))
     {
         CU_cleanup_registry();
         return CU_get_error();

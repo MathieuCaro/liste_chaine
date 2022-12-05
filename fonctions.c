@@ -21,22 +21,23 @@ linked_list *new_element(int data)
 
 void list_free(linked_list *l)
 {
-   linked_list *tmp;
-   linked_list *first = l;
-   while(first)
-   {
-     tmp = first;
-     first = first->next;
-     free(tmp);
-   }
-   if(l!=NULL){
-        l=NULL;
+    linked_list *tmp;
+    linked_list *first = l;
+    while (first)
+    {
+        tmp = first;
+        first = first->next;
+        free(tmp);
+    }
+    if (l != NULL)
+    {
+        l = NULL;
     }
 }
 
-
 // push : add an element at the end of the list
-void push(linked_list *head, int data){
+void push(linked_list *head, int data)
+{
     linked_list *new_one = head;
     while (new_one->next != NULL)
     {
@@ -59,7 +60,8 @@ void pop(linked_list *head)
     free(last_one);
 }
 
-void add_index(linked_list *head, int data, int index){
+void add_index(linked_list *head, int data, int index)
+{
     linked_list *added_after = head, *temp;
     int compteur = 0;
     while (compteur < index - 1)
@@ -119,7 +121,7 @@ void add_after(linked_list *head, int data, int value)
 // length : return the length of the linked list
 int length(linked_list *head)
 {
-    int compteur =1 ;
+    int compteur = 1;
     linked_list *last_one = head;
     while (last_one->next != NULL)
     {
@@ -129,3 +131,24 @@ int length(linked_list *head)
     return compteur;
 }
 
+void revert(linked_list *head)
+{
+    linked_list *left = head;
+    linked_list *right = head;
+
+    while (right->next != NULL)
+    {
+        right = right->next;
+    }
+    while (left != right && left->previous != right)
+    {
+
+        int temp = left->data;
+        left->data = right->data;
+        right->data = temp;
+
+        left = left->next;
+
+        right = right->previous;
+    }
+}
